@@ -1,0 +1,33 @@
+/* 
+    Document   : default
+    Created on : 10-Apr-2013, 10:43:39
+    Author     : Fabricio Nogueira
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body{
+    font-family: Arial;
+    font-size: 0.8em;
+}
+
+a{
+    text-decoration: none;
+    color: #D34231;
+}
+
+a:hover{
+    color: red;
+}
+
+#inLine{
+    background-color: #F0F0F0 !important;
+    border-bottom: 2px solid #999999 !important;
+    list-style-type: none !important;
+    margin: 0px 0px 20px 0px !important;
+    padding: 7px 5px 7px 5px !important;
+}
+#inLine li{
+    display: inline !important;
+    padding: 0px 3px 0px 3px !important;
+}
+
