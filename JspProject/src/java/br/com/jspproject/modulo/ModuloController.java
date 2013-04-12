@@ -17,6 +17,7 @@ package br.com.jspproject.modulo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name="ModuloServlet", urlPatterns={"/modulo/ModuloServlet"})
 public class ModuloController extends HttpServlet {
-   
+    private ModuloDAO moduloData = new ModuloDAO();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -40,45 +41,79 @@ public class ModuloController extends HttpServlet {
         PrintWriter out = response.getWriter();
         RequestDispatcher rd = null;
         try {
-            
             String action  = request.getParameter("action");
-            String sCodigoModulo = request.getParameter("codigoModulo");
-            String nome = request.getParameter("nome");
-            String descricao = request.getParameter("descricao");
-            String sOrdem = request.getParameter("ordem");
-            
-            Integer codigoModulo = Integer.parseInt(sCodigoModulo);
-            Integer ordem = Integer.parseInt(sOrdem);
-            
-            Modulo modulo = new Modulo();
-            modulo.setCodigoModulo(codigoModulo);
-            modulo.setNome(nome);
-            modulo.setDescricao(descricao);
-            modulo.setOrdem(ordem);
-            
             try {
-                ModuloDAO modulodao = new ModuloDAO();
                 if (action.equals("salvar")) {
+                    String sCodigoModulo = request.getParameter("codigoModulo");
+                    String nome = request.getParameter("nome");
+                    String descricao = request.getParameter("descricao");
+                    String sOrdem = request.getParameter("ordem");
+
+                    Integer codigoModulo = Integer.parseInt(sCodigoModulo);
+                    Integer ordem = Integer.parseInt(sOrdem);
+
+                    Modulo modulo = new Modulo();
+                    modulo.setCodigoModulo(codigoModulo);
+                    modulo.setNome(nome);
+                    modulo.setDescricao(descricao);
+                    modulo.setOrdem(ordem);
+
+                    ModuloDAO modulodao = new ModuloDAO();
+                    
                     String cadastrar = modulodao.cadastrar(modulo);
                     if(cadastrar.equals("sucesso")){
-                        out.printf("<div class=\"alert alert-success\">\n" +
-"              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>\n" +
-"              <strong>Well done!</strong> You successfully read this important alert message.\n" +
-"            </div>");
+                        StringBuilder str = new StringBuilder();
+                        str.append("<div class=\"alert alert-success\">");
+                        str.append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>");
+                        str.append("<strong>Sucesso!</strong> Modulo cadastrado com sucesso.");
+                        str.append("</div>");
+                        out.printf(str.toString());
                         rd = request.getRequestDispatcher("/modulo/modulo.jsp");
                     }else{
                         rd = request.getRequestDispatcher("/view/erros.jsp");
                     }
                 }else if (action.equals("editar")) {
+                    String sCodigoModulo = request.getParameter("codigoModulo");
+                    String nome = request.getParameter("nome");
+                    String descricao = request.getParameter("descricao");
+                    String sOrdem = request.getParameter("ordem");
+
+                    Integer codigoModulo = Integer.parseInt(sCodigoModulo);
+                    Integer ordem = Integer.parseInt(sOrdem);
+
+                    Modulo modulo = new Modulo();
+                    modulo.setCodigoModulo(codigoModulo);
+                    modulo.setNome(nome);
+                    modulo.setDescricao(descricao);
+                    modulo.setOrdem(ordem);
+
+                    ModuloDAO modulodao = new ModuloDAO();
                     String editar = modulodao.editar(modulo);
                     if(editar.equals("sucesso")){
+                        StringBuilder str = new StringBuilder();
+                        str.append("<div class=\"alert alert-success\">");
+                        str.append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>");
+                        str.append("<strong>Sucesso!</strong> Modulo editado com sucesso.");
+                        str.append("</div>");
+                        out.printf(str.toString());
                         rd = request.getRequestDispatcher("/modulo/modulo.jsp");
                     }else{
                         rd = request.getRequestDispatcher("/view/erros.jsp");
                     }
                 }else if (action.equals("excluir")) {
+                    String sCodigoModulo = request.getParameter("codigoModulo");
+                    Integer codigoModulo = Integer.parseInt(sCodigoModulo);
+                    Modulo modulo = new Modulo();
+                    modulo.setCodigoModulo(codigoModulo);
+                    ModuloDAO modulodao = new ModuloDAO();
                     String excluir = modulodao.excluir(modulo);
                     if(excluir.equals("sucesso")){
+                        StringBuilder str = new StringBuilder();
+                        str.append("<div class=\"alert alert-success\">");
+                        str.append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>");
+                        str.append("<strong>Sucesso!</strong> Modulo excluido com sucesso.");
+                        str.append("</div>");
+                        out.printf(str.toString());
                         rd = request.getRequestDispatcher("/modulo/modulo.jsp");
                     }else{
                         rd = request.getRequestDispatcher("/view/erros.jsp");
@@ -87,14 +122,37 @@ public class ModuloController extends HttpServlet {
                     rd = request.getRequestDispatcher("/modulo/modulo.jsp");
                 }
             } catch (SQLException ex) {
+                out.close();
                 out.printf(ex.getMessage());
             }
             rd.include(request, response);
         } finally { 
             out.close();
+            rd = request.getRequestDispatcher("/view/erros.jsp");
         }
     } 
-
+    /**
+     * Serviço para listagem dos dados.
+     *
+     * @author Fabricio Nogueira
+     * @version 1.0.0
+     * @since 25-Mar-2013
+     * @return void
+     *
+     */
+    public List<Modulo> listar() {
+        List<Modulo> listaDeModulos = null;
+        try {
+            listaDeModulos = this.moduloData.listar();
+        } catch (SQLException ex) {
+            System.err.println(ex.getSQLState());
+        }
+        if (listaDeModulos.isEmpty()) {
+            return null;
+        } else {
+            return listaDeModulos;
+        }
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.

@@ -1,6 +1,8 @@
 jQuery(function(){
    var action = jQuery("#action"),
        btSalvar = jQuery("#btSalvar"),
+       btEditar = jQuery("#btEditar"),
+       btExcluir = jQuery("#btExcluir"),
        codigoModulo = jQuery("#codigoModulo"),
        nome = jQuery("#nome"),
        descricao = jQuery("#descricao"),
@@ -10,6 +12,14 @@ jQuery(function(){
    btSalvar.click(function(){
         action.val("salvar");
         validaSubmict();
+   });
+   btEditar.click(function(){
+        action.val("editar");
+        validaSubmict();
+   });
+   btExcluir.click(function(){
+        action.val("excluir");
+        documentSubmit();
    });
    btCancelar.click(function(){
         action.val("cancelar");

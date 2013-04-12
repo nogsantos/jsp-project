@@ -1,4 +1,4 @@
-<%@page import="br.com.jspproject.modulo.ModuloService"%>
+<%@page import="br.com.jspproject.modulo.ModuloController"%>
 <%@page import="br.com.jspproject.modulo.Modulo"%>
 <%@ page info=" 
          Documento : modulo
@@ -30,9 +30,9 @@
                     <h1>M&oacute;dulos</h1>
                 </div>
                 <div class="well">
-                    <a href="cadastro.jsp" class="btn btn-large btn-inverse">Cadastrar</a>
+                    <a href="modulo_cad.jsp" class="btn btn-large btn-inverse">Cadastrar</a>
                 </div>
-                <%ModuloService modulo = new ModuloService();%>
+                <%ModuloController modulo = new ModuloController();%>
                 <table class="table table-hover">
                     <tr>
                         <th>C&oacute;digo</th>
@@ -48,8 +48,8 @@
                         <td><%= moduloList.getDescricao()%></td>
                         <td><%= moduloList.getOrdem().toString()%></td>
                         <td style="text-align: center;">
-                            <a href="" class="btn btn-warning">Editar</a>
-                            <a href="" class="btn btn-danger">Excuir</a>
+                            <a href=<%="modulo_edit.jsp?codigoModulo="+moduloList.getCodigoModulo()%> class="btn btn-warning">Editar</a>
+                            <a href=<%="modulo_excl.jsp?codigoModulo="+moduloList.getCodigoModulo()%> class="btn btn-danger">Excuir</a>
                         </td>
                     </tr>
                     <%}%>

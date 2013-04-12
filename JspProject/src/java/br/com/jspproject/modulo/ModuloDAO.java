@@ -191,6 +191,42 @@ public class ModuloDAO {
         }
     }
     /**
+     * Recuperar por código
+     *
+     * @author Fabricio Nogueira
+     * @version 1.0.0
+     *
+     */
+    public Modulo recuperarPorCodigo(Integer codigoModulo) throws SQLException {
+        try {
+            this.sSql.append(" SELECT ");
+            this.sSql.append(" codigo_modulo, ");
+            this.sSql.append(" nome, ");
+            this.sSql.append(" descricao, ");
+            this.sSql.append(" ordem ");
+            this.sSql.append(" FROM ");
+            this.sSql.append(" modulo ");
+            this.sSql.append(" WHERE ");
+            this.sSql.append(" codigo_modulo = ");
+            this.sSql.append(codigoModulo);
+            this.statement = this.connection.createStatement();
+            this.resultSet = statement.executeQuery(this.sSql.toString());
+            Modulo modulo = new Modulo();
+            while (this.resultSet.next()) {
+                modulo.setCodigoModulo(this.resultSet.getInt("codigo_modulo"));
+                modulo.setNome(this.resultSet.getString("nome"));
+                modulo.setDescricao(this.resultSet.getString("descricao"));
+                modulo.setOrdem(this.resultSet.getInt("ordem"));
+            }
+            return modulo;
+        } catch (SQLException e) {
+            this.mensagem.append("##ERRO.MODULO.IMPLEMENTACAO.LISTAGEM::");
+            this.mensagem.append("Recuperar por código.");
+            this.mensagem.append(e.getSQLState());
+            throw new SQLException(this.mensagem.toString());
+        }
+    }
+    /**
      * Listagem simples
      *
      * @author Fabricio Nogueira
