@@ -20,7 +20,6 @@ quando ele ficar cheio.
 Define qual a pagina que será usada para tratar os
 erros, deve ser um endereço URL para uma página de erro
 --%>
-<%@ page errorPage="/errors.jsp" %>
 <%! private int accessCount = 0;%>
 <%! private String modulo = "jspProject"; %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

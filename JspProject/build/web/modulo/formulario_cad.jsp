@@ -13,7 +13,6 @@
         <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/modulo.js"></script>
-        <script type="text/javascript" src="../js/script.js"></script>
     </head>
     <body>
         <div class="container">
@@ -22,20 +21,20 @@
             <%@include file="/view/nav.jsp" %>
             <article>
                 <div class="page-header">
-                    <h1>Cadastro de m&oacute;dulo</h1>
+                    <h1>Cadastro de formul&aacute;rio</h1>
                 </div>
                 <form action="ModuloServlet" name="form" id="form" method="POST">
                     <% ModuloDAO modulo = new ModuloDAO();%>
                     <input type="hidden" name="action" id="action" value="" />
                     <input type="hidden" name="codigoModulo" id="codigoModulo" value="<%= modulo.moduloNextVal() %>" />
                     <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome" autocomplete="off" value="" />
+                    <input type="text" name="nome" id="nome" autocomplete="off" />
                     <label for="descricao">Descri&ccedil;&atilde;o</label>
-                    <input type="text" name="descricao" id="descricao" autocomplete="off" value="" />
+                    <input type="text" name="descricao" id="descricao" autocomplete="off" />
                     <label for="ordem">Ordem</label>
-                    <input type="text" name="ordem" id="ordem" autocomplete="off" value="" class="number number-only" />
+                    <input type="text" name="ordem" id="ordem" autocomplete="off" class="number" />
                     <div class="well well-large">
-                        <input type="button" class="btn btn-large" id="btSalvar" value="Cadastrar" />
+                        <input type="button" class="btn btn-large" id="btSalvar" value="Salvar" />
                         <input type="button" class="btn btn-large" id="btCancelar" value="Cancelar" />
                     </div>
                 </form>

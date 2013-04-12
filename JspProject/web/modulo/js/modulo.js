@@ -10,7 +10,7 @@ jQuery(function(){
        btCancelar = jQuery("#btCancelar");
        
    btSalvar.click(function(){
-        action.val("salvar");
+        action.val("cadastrar");
         validaSubmict();
    });
    btEditar.click(function(){

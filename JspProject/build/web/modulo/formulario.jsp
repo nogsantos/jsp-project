@@ -1,7 +1,7 @@
-<%@page import="br.com.jspproject.modulo.ModuloController"%>
+<%@page import="br.com.jspproject.modulo.ModuloService"%>
 <%@page import="br.com.jspproject.modulo.Modulo"%>
 <%@ page info=" 
-         Documento : modulo
+         Documento : formulario
          Autor     : Fabricio Nogueira
          Criado em : 10-Apr-2013, 15:01:02
          "%>
@@ -27,12 +27,12 @@
             <%@include file="/view/nav.jsp" %>
             <article>
                 <div class="page-header">
-                    <h1>M&oacute;dulos</h1>
+                    <h1>Formul&aacute;rio</h1>
                 </div>
                 <div class="well">
-                    <a href="modulo_cad.jsp" class="btn btn-large btn-inverse">Cadastrar</a>
+                    <a href="formulario_cad.jsp" class="btn btn-large btn-inverse">Cadastrar</a>
                 </div>
-                <%ModuloController modulo = new ModuloController();%>
+                <%ModuloService modulo = new ModuloService();%>
                 <table class="table table-hover">
                     <tr>
                         <th>C&oacute;digo</th>
@@ -48,8 +48,8 @@
                         <td><%= moduloList.getDescricao()%></td>
                         <td><%= moduloList.getOrdem().toString()%></td>
                         <td style="text-align: center;">
-                            <a href=<%="modulo_edit.jsp?codigoModulo="+moduloList.getCodigoModulo()%> class="btn btn-warning">Editar</a>
-                            <a href=<%="modulo_excl.jsp?codigoModulo="+moduloList.getCodigoModulo()%> class="btn btn-danger">Excuir</a>
+                            <a href="" class="btn btn-warning">Editar</a>
+                            <a href="" class="btn btn-danger">Excuir</a>
                         </td>
                     </tr>
                     <%}%>

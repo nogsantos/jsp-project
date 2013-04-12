@@ -31,3 +31,21 @@ a:hover{
     padding: 0px 3px 0px 3px !important;
 }
 
+input[type="text"]{
+    width: 100% !important;
+    height: 40px !important;
+    color: #666 !important;
+    font-weight: bold !important;
+    font-size: 15px !important;
+}
+
+.number{
+    
+}
+.number-only{
+    
+}
+
+number-currency{
+    
+}

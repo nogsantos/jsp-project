@@ -13,7 +13,6 @@
 
 package br.com.jspproject.modulo;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -40,10 +39,14 @@ public class ModuloController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         RequestDispatcher rd = null;
+        
         try {
             String action  = request.getParameter("action");
             try {
-                if (action.equals("salvar")) {
+                if (action.equals("cadastrar")) {
+                    /*
+                     * Cadastrar
+                     */
                     String sCodigoModulo = request.getParameter("codigoModulo");
                     String nome = request.getParameter("nome");
                     String descricao = request.getParameter("descricao");
@@ -67,12 +70,24 @@ public class ModuloController extends HttpServlet {
                         str.append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>");
                         str.append("<strong>Sucesso!</strong> Modulo cadastrado com sucesso.");
                         str.append("</div>");
+                        /*
+                         * mensagem e redirecionamento de sucesso
+                         */
                         out.printf(str.toString());
                         rd = request.getRequestDispatcher("/modulo/modulo.jsp");
+                        rd.include(request, response);
                     }else{
-                        rd = request.getRequestDispatcher("/view/erros.jsp");
+                        /*
+                         * mensagem e redirecionamento de erro
+                         */
+                        out.printf(cadastrar);
+                        rd = request.getRequestDispatcher("/erros.jsp");
+                        rd.include(request, response);
                     }
                 }else if (action.equals("editar")) {
+                    /*
+                     * Editar
+                     */
                     String sCodigoModulo = request.getParameter("codigoModulo");
                     String nome = request.getParameter("nome");
                     String descricao = request.getParameter("descricao");
@@ -95,12 +110,24 @@ public class ModuloController extends HttpServlet {
                         str.append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>");
                         str.append("<strong>Sucesso!</strong> Modulo editado com sucesso.");
                         str.append("</div>");
+                        /*
+                         * mensagem e redirecionamento de sucesso
+                         */
                         out.printf(str.toString());
                         rd = request.getRequestDispatcher("/modulo/modulo.jsp");
+                        rd.include(request, response);
                     }else{
-                        rd = request.getRequestDispatcher("/view/erros.jsp");
+                        /*
+                         * mensagem e redirecionamento de erro
+                         */
+                        out.printf(editar);
+                        rd = request.getRequestDispatcher("/erros.jsp");
+                        rd.include(request, response);
                     }
                 }else if (action.equals("excluir")) {
+                    /*
+                     * Excluir
+                     */
                     String sCodigoModulo = request.getParameter("codigoModulo");
                     Integer codigoModulo = Integer.parseInt(sCodigoModulo);
                     Modulo modulo = new Modulo();
@@ -113,22 +140,40 @@ public class ModuloController extends HttpServlet {
                         str.append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>");
                         str.append("<strong>Sucesso!</strong> Modulo excluido com sucesso.");
                         str.append("</div>");
+                        /*
+                         * mensagem e redirecionamento de sucesso
+                         */
                         out.printf(str.toString());
                         rd = request.getRequestDispatcher("/modulo/modulo.jsp");
+                        rd.include(request, response);
                     }else{
-                        rd = request.getRequestDispatcher("/view/erros.jsp");
+                        /*
+                         * mensagem e redirecionamento de erro
+                         */
+                        StringBuilder str = new StringBuilder();
+                        str.append("<div class=\"alert alert-error\">");
+                        str.append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>");
+                        str.append(excluir);
+                        str.append("</div>");
+                        out.printf(str.toString());
+                        rd = request.getRequestDispatcher("/erros.jsp");
+                        rd.include(request, response);
                     }
                 }else if(action.equals("cancelar")){
+                    /*
+                     * Cancelamento de ação
+                     */
                     rd = request.getRequestDispatcher("/modulo/modulo.jsp");
+                    rd.include(request, response);
                 }
             } catch (SQLException ex) {
                 out.close();
                 out.printf(ex.getMessage());
-            }
-            rd.include(request, response);
+            } 
         } finally { 
             out.close();
-            rd = request.getRequestDispatcher("/view/erros.jsp");
+            rd = request.getRequestDispatcher("/erros.jsp");
+            rd.include(request, response);
         }
     } 
     /**
