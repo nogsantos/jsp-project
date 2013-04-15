@@ -1,3 +1,4 @@
+<%@page import="br.com.jspproject.modulo.Formulario"%>
 <%@page import="br.com.jspproject.modulo.FormularioDAO"%>
 <%@page import="br.com.jspproject.modulo.ModuloDAO"%>
 <%@page import="br.com.jspproject.modulo.Modulo"%>
@@ -24,40 +25,46 @@
             <%@include file="/view/nav.jsp" %>
             <article>
                 <div class="page-header">
-                    <h1>Cadastro de formul&aacute;rio</h1>
+                    <h1>Edi&ccedil;&atilde;o formul&aacute;rio</h1>
                 </div>
                 <form action="FormularioController" name="form" id="form" method="POST">
                     <% 
-                        FormularioDAO formulario = new FormularioDAO();
-                        ModuloDAO modulo         = new ModuloDAO();
+                        Integer codigoFormulario = Integer.parseInt(request.getParameter("codigoFormulario"));
+                        FormularioDAO formularioDao = new FormularioDAO();
+                        
+                        Formulario formulario = new Formulario();
+                        formulario = formularioDao.recuperarPorCodigo(codigoFormulario);
+                        
+                        ModuloDAO modulo = new ModuloDAO();
                     %>
                     <input type="hidden" name="action" id="action" value="" />
-                    <input type="hidden" name="codigoFormulario" id="codigoFormulario" value="<%= formulario.formularioNextVal() %>" />
+                    <label for="nome">C&oacute;digo</label>
+                    <input type="text" name="codigoFormulario" id="codigoFormulario" autocomplete="off" readonly="readonly" value="<%= formulario.getCodigoFormulario() %>" />
                     <label for="codigoModulo">Modulo</label>
                     <select name="codigoModulo" id="codigoModulo">
                         <option value=""></option>
                         <% for(Modulo moduloList : modulo.listagemSimples()) { %>
-                        <option value="<%= moduloList.getCodigoModulo() %>"><%= moduloList.getNome() %></option>
+                        <option value="<%= moduloList.getCodigoModulo() %>" <%= moduloList.getCodigoModulo() == formulario.getCodigoModulo() ? "selected" : "" %>><%= moduloList.getNome() %></option>
                         <% } %>
                     </select>
                     <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome" autocomplete="off" />
+                    <input type="text" name="nome" id="nome" autocomplete="off" value="<%= formulario.getNome() %>" />
                     <label for="nomeMenu">Nome Menu</label>
-                    <input type="text" name="nomeMenu" id="nomeMenu" autocomplete="off" />
+                    <input type="text" name="nomeMenu" id="nomeMenu" autocomplete="off" value="<%= formulario.getNomeMenu()%>" />
                     <label for="descricao">Descri&ccedil;&atilde;o</label>
-                    <input type="text" name="descricao" id="descricao" autocomplete="off" />
+                    <input type="text" name="descricao" id="descricao" autocomplete="off" value="<%= formulario.getDescricao() %>" />
                     <label for="ordem">Ordem</label>
-                    <input type="text" name="ordem" id="ordem" autocomplete="off" class="number number-only" />
-                    Formul&aacute;rio Oculto: 
+                    <input type="text" name="ordem" id="ordem" autocomplete="off" value="<%= formulario.getOrdem() %>" class="number-only" />
+                    Formul&aacute;rio Oculto:
                     <label class="checkbox inline">
-                        <input type="radio" name="flagOculto" id="sim" value="t" /> Sim
+                        <input type="radio" name="flagOculto" id="sim" value="t" <%= formulario.getFlagOculto().equals("Oculto") ? "checked" : ""  %> /> Sim
                     </label>
                     <label class="checkbox inline">
-                        <input type="radio" name="flagOculto" id="nao" value="f" checked="checked" /> N&atilde;o
+                        <input type="radio" name="flagOculto" id="nao" value="f" <%= formulario.getFlagOculto().equals("Visivel") ? "checked" : ""  %> /> N&atilde;o
                     </label>
                     <br /><br />
                     <div class="well well-large">
-                        <input type="button" class="btn btn-large" id="btSalvar" value="Salvar" />
+                        <input type="button" class="btn btn-large" id="btEditar" value="Editar" />
                         <input type="button" class="btn btn-large" id="btCancelar" value="Cancelar" />
                     </div>
                 </form>

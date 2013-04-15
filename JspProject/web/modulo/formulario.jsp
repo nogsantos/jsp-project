@@ -1,5 +1,5 @@
-<%@page import="br.com.jspproject.modulo.ModuloService"%>
-<%@page import="br.com.jspproject.modulo.Modulo"%>
+<%@page import="br.com.jspproject.modulo.FormularioController"%>
+<%@page import="br.com.jspproject.modulo.Formulario"%>
 <%@ page info=" 
          Documento : formulario
          Autor     : Fabricio Nogueira
@@ -32,27 +32,33 @@
                 <div class="well">
                     <a href="formulario_cad.jsp" class="btn btn-large btn-inverse">Cadastrar</a>
                 </div>
-                <%ModuloService modulo = new ModuloService();%>
+                <% FormularioController formulario = new FormularioController();%>
                 <table class="table table-hover">
                     <tr>
                         <th>C&oacute;digo</th>
+                        <th>Modulo</th>
                         <th>Nome</th>
+                        <th>Nome Menu</th>
                         <th>Descri&ccedil;&atilde;o</th>
                         <th>Ordem</th>
+                        <th>Visibilidade</th>
                         <th style="text-align: center;">&spadesuit;</th>
                     </tr>
-                    <% for (Modulo moduloList : modulo.listar()) {%>
+                    <% for (Formulario formularioList : formulario.listar()) { %>
                     <tr>
-                        <td><%= moduloList.getCodigoModulo()%></td>
-                        <td><%= moduloList.getNome()%></td>
-                        <td><%= moduloList.getDescricao()%></td>
-                        <td><%= moduloList.getOrdem().toString()%></td>
+                        <td><%= formularioList.getCodigoFormulario()%></td>
+                        <td><%= formularioList.getNomeModulo()%></td>
+                        <td><%= formularioList.getNome()%></td>
+                        <td><%= formularioList.getNomeMenu()%></td>
+                        <td><%= formularioList.getDescricao()%></td>
+                        <td><%= formularioList.getOrdem()%></td>
+                        <td><%= formularioList.getFlagOculto()%></td>
                         <td style="text-align: center;">
-                            <a href="" class="btn btn-warning">Editar</a>
-                            <a href="" class="btn btn-danger">Excuir</a>
+                            <a href=<%="formulario_edit.jsp?codigoFormulario="+formularioList.getCodigoFormulario()%> class="btn btn-warning">Editar</a>
+                            <a href=<%="formulario_excl.jsp?codigoFormulario="+formularioList.getCodigoFormulario()%> class="btn btn-danger">Excuir</a>
                         </td>
                     </tr>
-                    <%}%>
+                    <% } %>
                 </table>
             </article>
             <%@include file="/view/footer.jsp" %>
