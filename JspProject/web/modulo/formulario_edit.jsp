@@ -48,11 +48,11 @@
                         <% } %>
                     </select>
                     <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome" autocomplete="off" value="<%= formulario.getNome() %>" />
+                    <input type="text" name="nome" id="nome" autocomplete="off"  maxlength="250" value="<%= formulario.getNome() %>" />
                     <label for="nomeMenu">Nome Menu</label>
-                    <input type="text" name="nomeMenu" id="nomeMenu" autocomplete="off" value="<%= formulario.getNomeMenu()%>" />
+                    <input type="text" name="nomeMenu" id="nomeMenu" autocomplete="off"  maxlength="20" value="<%= formulario.getNomeMenu()%>" />
                     <label for="descricao">Descri&ccedil;&atilde;o</label>
-                    <input type="text" name="descricao" id="descricao" autocomplete="off" value="<%= formulario.getDescricao() %>" />
+                    <textarea name="descricao" id="descricao" maxlength="550"><%= formulario.getDescricao() %></textarea>
                     <label for="ordem">Ordem</label>
                     <input type="text" name="ordem" id="ordem" autocomplete="off" value="<%= formulario.getOrdem() %>" class="number-only" />
                     Formul&aacute;rio Oculto:
@@ -64,8 +64,8 @@
                     </label>
                     <br /><br />
                     <div class="well well-large">
-                        <input type="button" class="btn btn-large" id="btEditar" value="Editar" />
                         <input type="button" class="btn btn-large" id="btCancelar" value="Cancelar" />
+                        <input type="button" class="btn btn-large btn-primary" id="btEditar" value="Editar altera&ccedil;&otilde;es" />
                     </div>
                 </form>
             </article>

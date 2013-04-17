@@ -37,14 +37,15 @@
                         modulo = moduloDao.recuperarPorCodigo(codigoModulo);
                     %>
                     <input type="hidden" name="action" id="action" value="" />
+                    <input type="hidden" name="modal_form" id="modal_form" value="" />
                     <input type="hidden" name="codigoModulo" id="codigoModulo" value="<%= modulo.getCodigoModulo() %>" />
                     <p><b><i>C&oacute;digo:</i></b> <%= modulo.getCodigoModulo() %></p>
                     <p><b><i>Nome:</i></b> <%= modulo.getNome() %></p>
                     <p><b><i>Descri&ccedil;&atilde;o:</i></b> <%= modulo.getDescricao() %></p>
                     <p><b><i>Ordem:</i></b> <%= modulo.getOrdem() %></p>
                     <div class="well well-large">
-                        <input type="button" class="btn btn-large" id="btExcluir" value="Excluir" />
                         <input type="button" class="btn btn-large" id="btCancelar" value="Cancelar" />
+                        <input type="button" class="btn btn-large btn-danger" id="btExcluir" value="Excluir" />
                     </div>
                 </form>
             </article>

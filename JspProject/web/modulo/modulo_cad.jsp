@@ -27,16 +27,17 @@
                 <form action="ModuloServlet" name="form" id="form" method="POST">
                     <% ModuloDAO modulo = new ModuloDAO();%>
                     <input type="hidden" name="action" id="action" value="" />
+                    <input type="hidden" name="modal_form" id="modal_form" value="" />
                     <input type="hidden" name="codigoModulo" id="codigoModulo" value="<%= modulo.moduloNextVal() %>" />
                     <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome" autocomplete="off" value="" />
+                    <input type="text" name="nome" id="nome" autocomplete="off" maxlength="250" value="" />
                     <label for="descricao">Descri&ccedil;&atilde;o</label>
-                    <input type="text" name="descricao" id="descricao" autocomplete="off" value="" />
+                    <textarea name="descricao" id="descricao" maxlength="550"></textarea>
                     <label for="ordem">Ordem</label>
                     <input type="text" name="ordem" id="ordem" autocomplete="off" value="" class="number number-only" />
                     <div class="well well-large">
-                        <input type="button" class="btn btn-large" id="btSalvar" value="Cadastrar" />
                         <input type="button" class="btn btn-large" id="btCancelar" value="Cancelar" />
+                        <input type="button" class="btn btn-large btn-primary" id="btSalvar" value="Salvar altera&ccedil;&otilde;es" />
                     </div>
                 </form>
             </article>

@@ -258,4 +258,39 @@ public class FormularioDAO {
             throw new SQLException(this.mensagem.toString());
         }
     }
+    /**
+     * Consulta os formulários por módulo.
+     *
+     * @author Fabricio Nogueira
+     * @version 1.0.0
+     *
+     */
+    public List<Formulario> consultarFormulariosPorModulo(Integer codigoModulo) throws SQLException {
+        try {
+            List<Formulario> listaDeFormularios = new ArrayList();
+            this.sSql.append(" SELECT ");
+            this.sSql.append(" f.codigo_formulario, ");
+            this.sSql.append(" f.nome ");
+            this.sSql.append(" FROM ");
+            this.sSql.append(" formulario f, modulo m ");
+            this.sSql.append(" WHERE ");
+            this.sSql.append(" f.codigo_modulo = m.codigo_modulo ");
+            this.sSql.append(" AND m.codigo_modulo = ");
+            this.sSql.append(codigoModulo);
+            this.statement = this.connection.createStatement();
+            this.resultSet = statement.executeQuery(this.sSql.toString());
+            while (this.resultSet.next()) {
+                Formulario formularioList = new Formulario();
+                formularioList.setCodigoFormulario(this.resultSet.getInt("codigo_formulario"));
+                formularioList.setNome(this.resultSet.getString("nome"));
+                listaDeFormularios.add(formularioList);
+            }
+            return listaDeFormularios;
+        } catch (SQLException e) {
+            this.mensagem.append("##ERRO.FORMULARIO.IMPLEMENTACAO.LISTAGEM::");
+            this.mensagem.append("Erro na listagem dos dados.: (SQL)");
+            this.mensagem.append(e.getSQLState());
+            throw new SQLException(this.mensagem.toString());
+        }
+    }
 }

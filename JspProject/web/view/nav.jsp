@@ -48,6 +48,7 @@
                         <li class= <%= moduloActive +" dropdown"%>>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Modulos<b class="caret"></b></a>
                             <ul class="dropdown-menu">
+                                <li class="nav-header">Modulos</li>
                                 <li><a href=<%= moduloMenu + "/modulo_cad.jsp" %>>Cadastrar Modulo</a></li>
                                 <li><a href=<%= moduloMenu + "/modulo.jsp" %>>Listagem de Modulo</a></li>
                                 <li class="divider"></li>
@@ -63,7 +64,6 @@
                         <li class= <%= pessoaActive +" dropdown"%>>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pessoas <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li class="divider"></li>
                                 <li class="nav-header">Usu&aacute;rios</li>
                                 <li><a href=<%= pessoaMenu + "/usuario_cad.jsp" %>>Cadastrar Usu&aacute;rio </a></li>
                                 <li><a href=<%= pessoaMenu + "/usuario.jsp" %>>Listagem Usu&aacute;rio </a></li>

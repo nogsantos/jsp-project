@@ -33,14 +33,19 @@ a:hover{
 
 input[type="text"], 
 select{
-    width: 100% !important;
+    width: 99% !important;
     height: 40px !important;
     color: #666 !important;
     font-weight: bold !important;
     font-size: 15px !important;
 }
 select{
+    width: 100% !important;
+}
 
+textArea{
+    height: 95px !important;
+    width: 99% !important;
 }
 
 .number{

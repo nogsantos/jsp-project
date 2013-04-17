@@ -42,6 +42,7 @@ public class ModuloController extends HttpServlet {
         
         try {
             String action  = request.getParameter("action");
+            String modalForm  = request.getParameter("modal_form");
             try {
                 if (action.equals("cadastrar")) {
                     /*
@@ -74,7 +75,11 @@ public class ModuloController extends HttpServlet {
                          * mensagem e redirecionamento de sucesso
                          */
                         out.printf(str.toString());
-                        rd = request.getRequestDispatcher("/modulo/modulo.jsp");
+                        if(!modalForm.isEmpty()){
+                            rd = request.getRequestDispatcher("/modulo/"+modalForm+".jsp");
+                        }else{
+                            rd = request.getRequestDispatcher("/modulo/modulo.jsp");
+                        }
                         rd.include(request, response);
                     }else{
                         /*
@@ -163,7 +168,11 @@ public class ModuloController extends HttpServlet {
                     /*
                      * Cancelamento de ação
                      */
-                    rd = request.getRequestDispatcher("/modulo/modulo.jsp");
+                    if(!modalForm.isEmpty()){
+                        rd = request.getRequestDispatcher("/modulo/"+modalForm+".jsp");
+                    }else{
+                        rd = request.getRequestDispatcher("/modulo/modulo.jsp");
+                    }
                     rd.include(request, response);
                 }
             } catch (SQLException ex) {

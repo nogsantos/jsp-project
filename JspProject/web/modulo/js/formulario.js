@@ -35,10 +35,10 @@ jQuery(function(){
    function validaSubmict(){
        var erro = "";
        if(codigoModulo.val() === ""){
-           erro += "- Codigo Modulo\n ";
+           erro += "- Codigo Modulo\n";
        }
        if(codigoFormulario.val() === ""){
-           erro += "- Codigo Formulario\n ";
+           erro += "- Codigo Formulario\n";
        }
        if(nome.val() === ""){
            erro += "- Nome\n";
@@ -60,6 +60,6 @@ jQuery(function(){
        }
    }
    function documentSubmit(){
-        document.form.submit();
+        jQuery("#form").submit();
    }
 });

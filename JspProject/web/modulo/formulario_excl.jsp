@@ -45,8 +45,8 @@
                     <p><b><i>Ordem:</i></b> <%= formulario.getOrdem() %></p>
                     <p><b><i>Visibilidade:</i></b> <%= formulario.getFlagOculto() %></p>
                     <div class="well well-large">
-                        <input type="button" class="btn btn-large" id="btExcluir" value="Excluir" />
                         <input type="button" class="btn btn-large" id="btCancelar" value="Cancelar" />
+                        <input type="button" class="btn btn-large btn-danger" id="btExcluir" value="Excluir" />
                     </div>
                 </form>
             </article>

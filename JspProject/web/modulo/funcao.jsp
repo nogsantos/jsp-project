@@ -1,5 +1,5 @@
-<%@page import="br.com.jspproject.modulo.ModuloService"%>
-<%@page import="br.com.jspproject.modulo.Modulo"%>
+<%@page import="br.com.jspproject.modulo.FuncaoController"%>
+<%@page import="br.com.jspproject.modulo.Funcao"%>
 <%@ page info=" 
          Documento : funcao
          Autor     : Fabricio Nogueira
@@ -32,24 +32,26 @@
                 <div class="well">
                     <a href="funcao_cad.jsp" class="btn btn-large btn-inverse">Cadastrar</a>
                 </div>
-                <%ModuloService modulo = new ModuloService();%>
+                <% FuncaoController funcao = new FuncaoController();%>
                 <table class="table table-hover">
                     <tr>
                         <th>C&oacute;digo</th>
+                        <th>Modulo</th>
+                        <th>Formul&aacute;rio</th>
                         <th>Nome</th>
                         <th>Descri&ccedil;&atilde;o</th>
-                        <th>Ordem</th>
                         <th style="text-align: center;">&spadesuit;</th>
                     </tr>
-                    <% for (Modulo moduloList : modulo.listar()) {%>
+                    <% for (Funcao funcaoList : funcao.listar()) {%>
                     <tr>
-                        <td><%= moduloList.getCodigoModulo()%></td>
-                        <td><%= moduloList.getNome()%></td>
-                        <td><%= moduloList.getDescricao()%></td>
-                        <td><%= moduloList.getOrdem().toString()%></td>
+                        <td><%= funcaoList.getCodigoFuncao() %></td>
+                        <td><%= funcaoList.getNomeModulo() %></td>
+                        <td><%= funcaoList.getNomeFormulario() %></td>
+                        <td><%= funcaoList.getNome() %></td>
+                        <td><%= funcaoList.getDescricao() %></td>
                         <td style="text-align: center;">
-                            <a href="" class="btn btn-warning">Editar</a>
-                            <a href="" class="btn btn-danger">Excuir</a>
+                            <a href=<%="funcao_edit.jsp?codigoFuncao="+funcaoList.getCodigoFuncao()%> class="btn btn-warning">Editar</a>
+                            <a href=<%="funcao_excl.jsp?codigoFuncao="+funcaoList.getCodigoFuncao()%> class="btn btn-danger">Excuir</a>
                         </td>
                     </tr>
                     <%}%>
