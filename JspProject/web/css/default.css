@@ -32,6 +32,7 @@ a:hover{
 }
 
 input[type="text"], 
+input[type="password"], 
 select{
     width: 99% !important;
     height: 40px !important;
