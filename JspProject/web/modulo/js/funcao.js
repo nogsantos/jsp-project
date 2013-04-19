@@ -9,11 +9,20 @@ jQuery(function(){
        btEditar = jQuery("#btEditar"),
        btExcluir = jQuery("#btExcluir"),
        btCancelar = jQuery("#btCancelar"),
+       divCodigoModulo = jQuery("#divCodigoModulo"),
+       helpCodigoModulo = jQuery("#helpCodigoModulo"),
+       divCodigoFormulario = jQuery("#divCodigoFormulario"),
+       helpCodigoFormulario = jQuery("#helpCodigoFormulario"),
+       divNome = jQuery("#divNome"),
+       helpNome = jQuery("#helpNome"),
+       divDescricao = jQuery("#divDescricao"),
+       helpDescricao = jQuery("#helpDescricao"),
        codigoFormulario = jQuery("#codigoFormulario"),
        codigoModulo = jQuery("#codigoModulo"),
        codigoFuncao = jQuery("#codigoFuncao"),
        nome = jQuery("#nome"),
-       descricao = jQuery("#descricao");
+       descricao = jQuery("#descricao"),
+       form = jQuery("#form");
        
    btSalvar.click(function(){
         action.val("cadastrar");
@@ -25,38 +34,37 @@ jQuery(function(){
    });
    btExcluir.click(function(){
         action.val("excluir");
-        documentSubmit();
+        documentSubmit(form);
    });
    btCancelar.click(function(){
         action.val("cancelar");
-        documentSubmit();
+        documentSubmit(form);
    });
    function validaSubmict(){
        var erro = "";
-       if(codigoModulo.val() === ""){
-           erro += "- Codigo Modulo\n ";
-       }
-       if(codigoFormulario.val() === ""){
-           erro += "- Codigo Formulario\n ";
-       }
+       errorHelp(divCodigoModulo, helpCodigoModulo,"remove");
+       errorHelp(divCodigoFormulario, helpCodigoFormulario, "remove");
+       errorHelp(divNome, helpNome,"remove");
        if(codigoFuncao.val() === ""){
            erro += "- Codigo Função\n ";
        }
-       if(nome.val() === ""){
-           erro += "- Nome\n";
+       if(jQuery.trim(codigoModulo.val()) === ""){
+           erro += "- Codigo Modulo\n ";
+           errorHelp(divCodigoModulo, helpCodigoModulo,"add");
        }
-       if(descricao.val() === ""){
-           erro += "- Descricao\n";
+       if(jQuery.trim(codigoFormulario.val()) === ""){
+           erro += "- Codigo Formulario\n ";
+           errorHelp(divCodigoFormulario, helpCodigoFormulario, "add");
+       }
+       if(jQuery.trim(nome.val()) === ""){
+           erro += "- Nome\n";
+           errorHelp(divNome, helpNome,"add");
        }
        if(erro !== ""){
-            alert("Erro encontrados campos vazios\n" + erro);
             return false;
        }else{
-           documentSubmit();
+           documentSubmit(form);
        }
-   }
-   function documentSubmit(){
-        document.form.submit();
    }
    /*
     * 
