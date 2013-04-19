@@ -67,6 +67,10 @@
                                 <li class="nav-header">Usu&aacute;rios</li>
                                 <li><a href=<%= pessoaMenu + "/usuario_cad.jsp" %>>Cadastrar Usu&aacute;rio </a></li>
                                 <li><a href=<%= pessoaMenu + "/usuario.jsp" %>>Listagem Usu&aacute;rio </a></li>
+                                <li class="divider"></li>
+                                <li class="nav-header">Perfil</li>
+                                <li><a href=<%= pessoaMenu + "/perfil_cad.jsp" %>>Cadastrar Perfil </a></li>
+                                <li><a href=<%= pessoaMenu + "/perfil.jsp" %>>Listagem Perfis </a></li>
                             </ul>
                         </li>
                         <li class= <%= permissaoActive +" dropdown"%>>
