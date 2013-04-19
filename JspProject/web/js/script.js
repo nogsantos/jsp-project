@@ -1,6 +1,5 @@
 /* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Defaults js
  */
 jQuery(function() {
     /*
@@ -18,4 +17,26 @@ jQuery(function() {
         }
     });
 });
+/*
+ * Adiciona ou remove erros nos campos obrigatórios.
+ * 
+ * @param obj div
+ * @param obj help
+ * @param string tipo (add, remove)
+ */
+function errorHelp(div, help, tipo){
+    if(tipo === "add"){
+         div.addClass("error");
+         help.show();
+    }else if( tipo === "remove"){
+         div.removeClass("error");
+         help.hide();
+    }
+}
+/*
+* Envia o formulário.
+*/
+function documentSubmit(formulario){
+     formulario.submit();
+}
 

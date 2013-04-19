@@ -29,12 +29,30 @@
                     <input type="hidden" name="action" id="action" value="" />
                     <input type="hidden" name="modal_form" id="modal_form" value="" />
                     <input type="hidden" name="codigoModulo" id="codigoModulo" value="<%= modulo.moduloNextVal() %>" />
-                    <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome" autocomplete="off" maxlength="250" value="" />
-                    <label for="descricao">Descri&ccedil;&atilde;o</label>
-                    <textarea name="descricao" id="descricao" maxlength="550"></textarea>
-                    <label for="ordem">Ordem</label>
-                    <input type="text" name="ordem" id="ordem" autocomplete="off" value="" class="number number-only" />
+                    <div id="divNome" class="control-group">
+                        <label class="control-label" for="nome">
+                            Nome* <span id="helpNome" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                        </label>
+                        <div class="controls">
+                            <input type="text" name="nome" id="nome" autocomplete="off" maxlength="250" value="" />
+                        </div>
+                    </div>
+                    <div id="divDescricao" class="control-group">
+                        <label class="control-label" for="descricao">
+                            Descri&ccedil;&atilde;o* <span id="helpDescricao" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                        </label>
+                        <div class="controls">
+                            <textarea name="descricao" id="descricao" maxlength="550"></textarea>
+                        </div>
+                    </div>
+                    <div id="divOrdem" class="control-group">
+                        <label class="control-label" for="ordem">
+                            Ordem* <span id="helpOrdem" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                        </label>
+                        <div class="controls">
+                            <input type="text" name="ordem" id="ordem" autocomplete="off" value="" class="number number-only" />
+                        </div>
+                    </div>
                     <div class="well well-large">
                         <input type="button" class="btn btn-large" id="btCancelar" value="Cancelar" />
                         <input type="button" class="btn btn-large btn-primary" id="btSalvar" value="Salvar altera&ccedil;&otilde;es" />

@@ -11,6 +11,7 @@
         <style type="text/css" media="screen">@import url(../css/default.css);</style>
         <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/script.js"></script>
         <script type="text/javascript" src="js/funcao.js"></script>
     </head>
     <body>

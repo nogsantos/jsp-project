@@ -15,6 +15,7 @@
         <style type="text/css" media="screen">@import url(../css/bootstrap-responsive.min.css);</style>
         <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/script.js"></script>
         <script type="text/javascript" src="js/funcao.js"></script>
     </head>
     <body>
@@ -27,28 +28,52 @@
                     <h1>Cadastro de fun&ccedil;&atilde;o</h1>
                 </div>
                 <form action="FuncaoController" name="form" id="form" method="POST">
-                    <% 
+                    <%
                         FuncaoDAO funcao = new FuncaoDAO();
                         ModuloDAO modulo = new ModuloDAO();
                     %>
                     <input type="hidden" name="action" id="action" value="" />
-                    <input type="hidden" name="codigoFuncao" id="codigoFuncao" value="<%= funcao.funcaoNextVal() %>" />
-                    <label for="codigoModulo">Modulo</label>
-                    <select name="codigoModulo" id="codigoModulo">
-                        <option value=""></option>
-                        <% for(Modulo moduloList : modulo.listagemSimples()) { %>
-                        <option value="<%= moduloList.getCodigoModulo() %>"><%= moduloList.getNome() %></option>
-                        <% } %>
-                    </select>
-                    <label for="codigoFormulario" >Formul&aacute;rio</label>
-                    <img src="../img/ajax-loader.gif"  border="0" alt="" id="ajax-load" style="position:fixed;display:none;"/>
-                    <select name="codigoFormulario" id="codigoFormulario" disabled >
-                        <option value=""></option>
-                    </select>
-                    <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome" autocomplete="off" maxlength="250" />
-                    <label for="descricao">Descri&ccedil;&atilde;o</label>
-                    <textarea name="descricao" id="descricao" maxlength="550"></textarea>
+                    <input type="hidden" name="codigoFuncao" id="codigoFuncao" value="<%= funcao.funcaoNextVal()%>" />
+                    <div id="divCodigoModulo" class="control-group">
+                        <label class="control-label" for="codigoModulo">
+                            Modulo* <span id="helpCodigoModulo" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                        </label>
+                        <div class="controls">
+                            <select name="codigoModulo" id="codigoModulo">
+                                <option value=""></option>
+                                <% for (Modulo moduloList : modulo.listagemSimples()) {%>
+                                <option value="<%= moduloList.getCodigoModulo()%>"><%= moduloList.getNome()%></option>
+                                <% }%>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="divCodigoFormulario" class="control-group">
+                        <label class="control-label" for="nome">
+                            Formul&aacute;rio* <span id="helpCodigoFormulario" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                        </label>
+                        <div class="controls">
+                            <img src="../img/ajax-loader.gif"  border="0" alt="" id="ajax-load" style="position:fixed;display:none;"/>
+                            <select name="codigoFormulario" id="codigoFormulario" disabled >
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="divNome" class="control-group">
+                        <label class="control-label" for="nome">
+                            Nome* <span id="helpNome" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                        </label>
+                        <div class="controls">
+                            <input type="text" name="nome" id="nome" autocomplete="off" maxlength="250" value="" />
+                        </div>
+                    </div>
+                    <div id="divDescricao" class="control-group">
+                        <label class="control-label" for="nome">
+                            Descri&ccedil;&atilde;o
+                        </label>
+                        <div class="controls">
+                            <textarea name="descricao" id="descricao" maxlength="550"></textarea>
+                        </div>
+                    </div>
                     <div class="well well-large">
                         <input type="button" class="btn btn-large" id="btCancelar" value="Cancelar" />
                         <input type="button" class="btn btn-large btn-primary" id="btSalvar" value="Salvar altera&ccedil;&otilde;es" />

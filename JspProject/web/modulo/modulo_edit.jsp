@@ -36,12 +36,30 @@
                     <input type="hidden" name="modal_form" id="modal_form" value="" />
                     <label for="nome">C&oacute;digo</label>
                     <input type="text" name="codigoModulo" id="codigoModulo" autocomplete="off" readonly="readonly" value="<%= modulo.getCodigoModulo() %>" />
-                    <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome" autocomplete="off" value="<%= modulo.getNome() %>" />
-                    <label for="descricao">Descri&ccedil;&atilde;o</label>
-                    <textarea name="descricao" id="descricao" maxlength="550"><%= modulo.getDescricao() %></textarea>
-                    <label for="ordem">Ordem</label>
-                    <input type="text" name="ordem" id="ordem" autocomplete="off" value="<%= modulo.getOrdem() %>" class="number-only" />
+                    <div id="divNome" class="control-group">
+                        <label class="control-label" for="nome">
+                            Nome* <span id="helpNome" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                        </label>
+                        <div class="controls">
+                            <input type="text" name="nome" id="nome" autocomplete="off" maxlength="250" value="<%= modulo.getNome() %>" />
+                        </div>
+                    </div>
+                    <div id="divDescricao" class="control-group">
+                        <label class="control-label" for="descricao">
+                            Descri&ccedil;&atilde;o* <span id="helpDescricao" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                        </label>
+                        <div class="controls">
+                            <textarea name="descricao" id="descricao" maxlength="550"><%= modulo.getDescricao() %></textarea>
+                        </div>
+                    </div>
+                    <div id="divOrdem" class="control-group">
+                        <label class="control-label" for="ordem">
+                            Ordem* <span id="helpOrdem" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                        </label>
+                        <div class="controls">
+                            <input type="text" name="ordem" id="ordem" autocomplete="off" value="<%= modulo.getOrdem() %>" class="number number-only" />
+                        </div>
+                    </div>
                     <div class="well well-large">
                         <input type="button" class="btn btn-large" id="btCancelar" value="Cancelar" />
                         <input type="button" class="btn btn-large btn-primary" id="btEditar" value="Editar altera&ccedil;&otilde;es" />

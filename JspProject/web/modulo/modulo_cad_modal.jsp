@@ -9,8 +9,8 @@
         <style type="text/css" media="screen">@import url(../css/default.css);</style>
         <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/modulo-modal.js"></script>
         <script type="text/javascript" src="../js/script.js"></script>
+        <script type="text/javascript" src="js/modulo-modal.js"></script>
     </head>
     <body>
         <article>
@@ -19,12 +19,30 @@
                 <input type="hidden" name="modal_form" id="modal_form" value="formulario_cad" />
                 <% ModuloDAO modulo = new ModuloDAO();%>
                 <input type="hidden" name="codigoModulo" id="codigoModuloModal" value="<%= modulo.moduloNextVal() %>" />
-                <label for="nome">Nome</label>
-                <input type="text" name="nome" id="nomeModal" autocomplete="off" maxlength="250" value="" />
-                <label for="descricao">Descri&ccedil;&atilde;o</label>
-                <textarea name="descricao" id="descricao" maxlength="550"></textarea>
-                <label for="ordem">Ordem</label>
-                <input type="text" name="ordem" id="ordemModal" autocomplete="off" value="" class="number number-only" />
+                <div id="divNomeModal" class="control-group">
+                    <label class="control-label" for="nome">
+                        Nome* <span id="helpNomeModal" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                    </label>
+                    <div class="controls">
+                        <input type="text" name="nome" id="nomeModal" autocomplete="off" maxlength="250" value="" />
+                    </div>
+                </div>
+                <div id="divDescricaoModal" class="control-group">
+                    <label class="control-label" for="descricao">
+                        Descri&ccedil;&atilde;o* <span id="helpDescricaoModal" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                    </label>
+                    <div class="controls">
+                        <textarea name="descricao" id="descricaoModal" maxlength="550"></textarea>
+                    </div>
+                </div>
+                <div id="divOrdemModal" class="control-group">
+                    <label class="control-label" for="ordem">
+                        Ordem* <span id="helpOrdemModal" class="help-inline" style="display: none;">(Obrigat&oacute;rio)</span>
+                    </label>
+                    <div class="controls">
+                        <input type="text" name="ordem" id="ordemModal" autocomplete="off" value="" class="number number-only" />
+                    </div>
+                </div>
                 <div class="well well-large">
                     <input type="button" class="btn btn-large" id="btCancelarModal" data-dismiss="modal" aria-hidden="true" value="Cancelar" />
                     <input type="button" class="btn btn-large btn-primary" id="btSalvarModal" value="Salvar altera&ccedil;&otilde;es" />
