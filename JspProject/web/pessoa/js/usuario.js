@@ -4,6 +4,16 @@ jQuery(function(){
         btEditar = jQuery("#btEditar"),
         btExcluir = jQuery("#btExcluir"),
         btCancelar = jQuery("#btCancelar"),
+        btRemove = jQuery("#btRemove"),
+        btAdd = jQuery("#btAdd"),
+        divCodigoPessoa = jQuery("#divCodigoPessoa"),
+        helpCodigoPessoa = jQuery("#helpCodigoPessoa"),
+        divNome = jQuery("#divNome"),
+        helpNome = jQuery("#helpNome"),
+        divLogin = jQuery("#divLogin"),
+        helpLogin = jQuery("#helpLogin"),
+        divSenha = jQuery("#divSenha"),
+        helpSenha = jQuery("#helpSenha"),
         codigoPessoa = jQuery("#codigoPessoa"),
         nome = jQuery("#nome"),
         logradouro = jQuery("#logradouro"),
@@ -13,8 +23,7 @@ jQuery(function(){
         senha = jQuery("#senha"),
         selPerfilDisponiveis = jQuery("#selPerfilDisponiveis"),
         selPerfis = jQuery("#selPerfis"),
-        btRemove = jQuery("#btRemove"),
-        btAdd = jQuery("#btAdd"),
+        divAlerta = jQuery("#divAlerta"),
         form = jQuery("#form");
     /*
      * 
@@ -29,36 +38,42 @@ jQuery(function(){
     });
     btExcluir.click(function() {
         action.val("excluir");
-        documentSubmit();
+        documentSubmit(form);
     });
     btCancelar.click(function() {
         action.val("cancelar");
-        documentSubmit();
+        documentSubmit(form);
     });
     function validaSubmict() {
         var erro = "";
+        errorHelp(divCodigoPessoa, helpCodigoPessoa,"remove");
+        errorHelp(divNome, helpNome,"remove");
+        errorHelp(divLogin, helpLogin,"remove");
+        errorHelp(divSenha, helpSenha,"remove");
+        divAlerta.hide();
         if (jQuery.trim(codigoPessoa.val()) === "") {
             erro += "- Codigo Identificador\n";
+            errorHelp(divCodigoPessoa, helpCodigoPessoa,"add");
         }
         if (jQuery.trim(nome.val()) === "") {
             erro += "- Nome\n";
+            errorHelp(divNome, helpNome,"add");
         }
         if (jQuery.trim(login.val()) === "") {
             erro += "- Login\n";
+            errorHelp(divLogin, helpLogin,"add");
         }
         if (jQuery.trim(senha.val()) === "") {
             erro += "- Senha\n";
+            errorHelp(divSenha, helpSenha,"add");
         }
         if (erro !== "") {
-            alert("Erro encontrados campos vazios\n" + erro);
+            divAlerta.show();
             return false;
         } else {
-            documentSubmit();
+            documentSubmit(form);
         }
     }
-    function documentSubmit() {
-        form.submit();
-    }        
     /*
      * Tabs
      */
@@ -67,7 +82,7 @@ jQuery(function(){
         jQuery(this).tab('show');
     });
     /*
-     * Selects
+     * Multi Selects
      */
     jQuery().ready(function() {
         btAdd.click(function() {

@@ -191,7 +191,7 @@ public class UsuarioController extends HttpServlet {
                     /*
                      * Cancelamento de ação
                      */
-                    rd = request.getRequestDispatcher("/modulo/funcao.jsp");
+                    rd = request.getRequestDispatcher("/pessoa/usuario.jsp");
                     rd.include(request, response);
                 }
             } catch (SQLException ex) {
