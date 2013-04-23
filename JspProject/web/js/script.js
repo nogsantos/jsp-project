@@ -7,7 +7,9 @@ jQuery(function() {
      */
     jQuery('.number-only').keydown(function(event) {
         var tecla = (window.event) ? event.keyCode : event.which;
-        if ((tecla > 47 && tecla < 58 || tecla >= 96 && tecla <= 105))
+        if ((tecla > 47 && tecla < 58)    || 
+            (tecla >= 96 && tecla <= 105) || 
+            (tecla === 9 || tecla === 0))
             return true;
         else {
             if (tecla !== 8)
