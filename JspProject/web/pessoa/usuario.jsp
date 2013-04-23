@@ -32,34 +32,39 @@
                 <div class="well">
                     <a href="usuario_cad.jsp" class="btn btn-large btn-inverse">Cadastrar</a>
                 </div>
-                <% UsuarioController usuario = new UsuarioController();%>
-                <table class="table table-hover">
-                    <tr>
-                        <th>C&oacute;digo</th>
-                        <th>Nome</th>
-                        <th>Logradouro</th>
-                        <th>Email</th>
-                        <th>Telefone</th>
-                        <th>Login</th>
-                        <th>Senha</th>
-                        <th style="text-align: center;">&spadesuit;</th>
-                    </tr>
-                    <% for (Usuario usuarioList : usuario.listar()) {%>
-                    <tr>
-                        <td><%= usuarioList.getCodigoPessoa() %></td>
-                        <td><%= usuarioList.getNome() %></td>
-                        <td><%= usuarioList.getLogradouro() %></td>
-                        <td><%= usuarioList.getEmail() %></td>
-                        <td><%= usuarioList.getTelefone() %></td>
-                        <td><%= usuarioList.getLogin() %></td>
-                        <td><%= usuarioList.getSenha() %></td>
-                        <td style="text-align: center;">
-                            <a href=<%="usuario_edit.jsp?codigoPessoa="+usuarioList.getCodigoPessoa() %> class="btn btn-warning">Editar</a>
-                            <a href=<%="usuario_excl.jsp?codigoPessoa="+usuarioList.getCodigoPessoa() %> class="btn btn-danger">Excuir</a>
-                        </td>
-                    </tr>
-                    <%}%>
-                </table>
+                <% UsuarioController usuarioCount = new UsuarioController();%>
+                <% if(usuarioCount.listar() != null) {%>
+                    <table class="table table-hover">
+                        <tr>
+                            <th>C&oacute;digo</th>
+                            <th>Nome</th>
+                            <th>Logradouro</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Login</th>
+                            <th style="text-align: center;">&spadesuit;</th>
+                        </tr>
+                        <% UsuarioController usuarioListagem = new UsuarioController();%>
+                        <% for (Usuario usuarioList : usuarioListagem.listar()) {%>
+                        <tr>
+                            <td><%= usuarioList.getCodigoPessoa() %></td>
+                            <td><%= usuarioList.getNome() %></td>
+                            <td><%= usuarioList.getLogradouro() %></td>
+                            <td><%= usuarioList.getEmail() %></td>
+                            <td><%= usuarioList.getTelefone() %></td>
+                            <td><%= usuarioList.getLogin() %></td>
+                            <td style="text-align: center;">
+                                <a href=<%="usuario_edit.jsp?codigoPessoa="+usuarioList.getCodigoPessoa() %> class="btn btn-warning">Editar</a>
+                                <a href=<%="usuario_excl.jsp?codigoPessoa="+usuarioList.getCodigoPessoa() %> class="btn btn-danger">Excuir</a>
+                            </td>
+                        </tr>
+                        <%}%>
+                    </table>
+                <%}else { %>
+                    <div class="alert alert-info">
+                        Nenhum cadastro realizado at&eacute; o momento.
+                    </div>
+                <%}%>
             </article>
             <%@include file="/view/footer.jsp" %>
         </div>

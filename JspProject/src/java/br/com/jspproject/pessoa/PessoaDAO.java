@@ -54,7 +54,7 @@ public class PessoaDAO {
             this.preStatement.setString(3, pessoa.getLogradouro());
             this.preStatement.setString(4, pessoa.getEmail());
             this.preStatement.setString(5, pessoa.getTelefone());
-            this.connection.setAutoCommit(true);
+            this.connection.setAutoCommit(false);
             this.preStatement.executeUpdate();
             return "sucesso";
         } catch (SQLException e) {
@@ -86,7 +86,7 @@ public class PessoaDAO {
             this.preStatement.setString(3, pessoa.getEmail());
             this.preStatement.setString(4, pessoa.getTelefone());
             this.preStatement.setString(5, pessoa.getCodigoPessoa());
-            this.connection.setAutoCommit(true);
+            this.connection.setAutoCommit(false);
             this.preStatement.executeUpdate();
             return "sucesso";
         } catch (SQLException e) {
@@ -110,7 +110,7 @@ public class PessoaDAO {
             this.sSql.append(" codigo_pessoa = ? ");
             this.preStatement = this.connection.prepareStatement(this.sSql.toString());
             this.preStatement.setString(1, pessoa.getCodigoPessoa());
-            this.connection.setAutoCommit(true);
+            this.connection.setAutoCommit(false);
             this.preStatement.executeUpdate();
             return "sucesso";
         } catch (SQLException e) {
@@ -118,6 +118,34 @@ public class PessoaDAO {
             this.mensagem.append("Erro na edição dos dados.");
             this.mensagem.append(e.getMessage());
             return this.mensagem.toString();
+        }
+    }
+    /**
+     * Método commit
+     *
+     * @author Fabricio Nogueira
+     * @version 1.0.0
+     *
+     */
+    public void PessoaCommit() throws SQLException {
+        try {
+            this.connection.commit();
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
+    /**
+     * Método rolback
+     *
+     * @author Fabricio Nogueira
+     * @version 1.0.0
+     *
+     */
+    public void pessoaRolback() throws SQLException {
+        try {
+            this.connection.rollback();
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
         }
     }
 }

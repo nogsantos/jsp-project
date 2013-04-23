@@ -128,8 +128,7 @@
                                     </td>
                                     <td style="width: 40%">
                                         <label for="selPerfis">Perfis Cadastrados</label>
-                                        <select multiple id="selPerfis" name="perfis" class="selPerfil">
-                                        </select>  
+                                        <select multiple id="selPerfis" name="perfil" class="selPerfil"></select>  
                                     </td>
                                 </tr>
                             </table>

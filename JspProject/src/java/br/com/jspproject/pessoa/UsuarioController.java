@@ -51,41 +51,102 @@ public class UsuarioController extends HttpServlet {
                      * Cadastrar
                      */
                     try {
-                        String sCodigoFormulario = request.getParameter("codigoFormulario");
-                        String sCodigoFuncao = request.getParameter("codigoFuncao");
+                        Integer count = 0;
+                        String codigoPessoa = request.getParameter("codigoPessoa");
                         String nome = request.getParameter("nome");
-                        String descricao = request.getParameter("descricao");
-
-                        Integer codigoFormulario = Integer.parseInt(sCodigoFormulario);
-                        Integer codigoFuncao = Integer.parseInt(sCodigoFuncao);
-
-                        Funcao funcao = new Funcao();
-                        funcao.setCodigoFormulario(codigoFormulario);
-                        funcao.setCodigoFuncao(codigoFuncao);
-                        funcao.setNome(nome);
-                        funcao.setDescricao(descricao);
-
-                        FuncaoDAO funcaoDAO = new FuncaoDAO();
-
-                        String cadastrar = funcaoDAO.cadastrar(funcao);
-                        if (cadastrar.equals("sucesso")) {
-                            StringBuilder str = new StringBuilder();
-                            str.append("<div class=\"alert alert-success\">");
-                            str.append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>");
-                            str.append("<strong>Sucesso!</strong> Função cadastrada com sucesso.");
-                            str.append("</div>");
+                        String logradouro = request.getParameter("logradouro");
+                        String email = request.getParameter("email");
+                        String telefone = request.getParameter("telefone");
+                        String login = request.getParameter("login");
+                        String senha = request.getParameter("senha");
+                        String[] codigoPerfil = request.getParameterValues("perfil");
+                        
+                        Pessoa pessoa = new Pessoa();
+                        pessoa.setCodigoPessoa(codigoPessoa);
+                        pessoa.setNome(nome);
+                        pessoa.setLogradouro(logradouro);
+                        pessoa.setEmail(email);
+                        pessoa.setTelefone(telefone);
+                        PessoaDAO pessoaDAO = new PessoaDAO();
+                        /*
+                         * Cadastro pessoa
+                         */
+                        String cadastrarPessoa = pessoaDAO.cadastrar(pessoa);
+                        if(cadastrarPessoa.equals("sucesso")){
+                            pessoaDAO.PessoaCommit();
+                            count += 1;
+                            Usuario usuario = new Usuario();
+                            usuario.setCodigoPessoa(codigoPessoa);
+                            usuario.setLogin(login);
+                            usuario.setSenha(senha);
+                            UsuarioDAO usuarioDAO = new UsuarioDAO();
                             /*
-                             * mensagem e redirecionamento de sucesso
+                             * cadastro usuario
                              */
-                            out.printf(str.toString());
-                            rd = request.getRequestDispatcher("/modulo/funcao.jsp");
-                            rd.include(request, response);
+                            String cadastrarUsuario = usuarioDAO.cadastrar(usuario, pessoa);
+                            if(cadastrarUsuario.equals("sucesso")){
+                                count += 1;
+                                /*
+                                 * cadastro perfil
+                                 */
+                                try {
+                                    if(codigoPerfil != null) {
+                                        String cadastrarPerfilUsuario;
+                                        for (int i = 0; i < codigoPerfil.length; i++) {
+                                            Perfil perfil = new Perfil();
+                                            UsuarioPerfilDAO usuarioperfilDAO = new UsuarioPerfilDAO();
+                                            perfil.setCodigoPerfil(Integer.parseInt(codigoPerfil[i]));
+                                            cadastrarPerfilUsuario = usuarioperfilDAO.cadastrar(usuario,perfil);
+                                            if(cadastrarPerfilUsuario.equals("sucesso")){
+                                                count += 1;
+                                                continue;
+                                            }else{
+                                                StringBuilder str = new StringBuilder();
+                                                str.append("<div class=\"alert alert-error\">");
+                                                str.append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>");
+                                                str.append("<strong>ERRO! </strong>");
+                                                str.append(cadastrarPerfilUsuario);
+                                                str.append("</div>");
+                                                out.printf(str.toString());
+                                                rd = request.getRequestDispatcher("/erros.jsp");
+                                                rd.include(request, response);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                } catch (Exception ex) {
+                                    out.printf(ex.getMessage());
+                                    rd = request.getRequestDispatcher("/erros.jsp");
+                                    rd.include(request, response);
+                                }
+                            }else{
+                                pessoaDAO.pessoaRolback();
+                               /*
+                                * mensagem e redirecionamento de erro
+                                */
+                                out.printf(cadastrarPessoa);
+                                rd = request.getRequestDispatcher("/erros.jsp");
+                                rd.include(request, response);
+                            }
                         } else {
                             /*
                              * mensagem e redirecionamento de erro
                              */
-                            out.printf(cadastrar);
+                            out.printf(cadastrarPessoa);
                             rd = request.getRequestDispatcher("/erros.jsp");
+                            rd.include(request, response);
+                        }
+                        if(count >= 2){
+                            /*
+                             * mensagem e redirecionamento de sucesso
+                             */
+                            StringBuilder str = new StringBuilder();
+                            str.append("<div class=\"alert alert-success\">");
+                            str.append("<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>");
+                            str.append("<strong>Sucesso!</strong> Usuario cadastrada com sucesso.");
+                            str.append("</div>");
+                            out.printf(str.toString());
+                            rd = request.getRequestDispatcher("/pessoa/usuario.jsp");
                             rd.include(request, response);
                         }
                     } catch (NumberFormatException e) {

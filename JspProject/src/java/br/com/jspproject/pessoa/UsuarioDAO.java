@@ -57,20 +57,13 @@ public class UsuarioDAO {
             this.sSql.append(" senha ");
             this.sSql.append(" ) VALUES ( ");
             this.sSql.append(" ?,?,? )");
-            /*
-             * Cadastrando a pessoa
-             */
-            PessoaDAO pessoaImpl = new PessoaDAO();
-            String cadastrar = pessoaImpl.cadastrar(pessoa);
-            if (cadastrar.equals("sucesso")) {
-                this.preStatement = this.connection.prepareStatement(this.sSql.toString());
-                this.preStatement.setString(1, pessoa.getCodigoPessoa());
-                this.preStatement.setString(2, usuario.getLogin());
-                this.preStatement.setString(3, Utils.encryptSenha(usuario.getSenha()));
-                this.connection.setAutoCommit(true);
-                this.preStatement.executeUpdate();
-            }
-            return cadastrar;
+            this.preStatement = this.connection.prepareStatement(this.sSql.toString());
+            this.preStatement.setString(1, pessoa.getCodigoPessoa());
+            this.preStatement.setString(2, usuario.getLogin());
+            this.preStatement.setString(3, Utils.encryptSenha(usuario.getSenha()));
+            this.connection.setAutoCommit(true);
+            this.preStatement.executeUpdate();
+            return "sucesso";
         } catch (SQLException e) {
             this.mensagem.append("##ERRO.USUARIO.IMPLEMENTACAO.CADASTRAR::");
             this.mensagem.append("Erro na inserção dos dados.");
