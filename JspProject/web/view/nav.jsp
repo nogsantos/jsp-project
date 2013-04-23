@@ -11,25 +11,25 @@
         moduloMenu      = "modulo";
         pessoaMenu      = "pessoa";
         permissaoMenu   = "permissao";
-        homeActive      = "active";
-        moduloActive    = "";
-        pessoaActive    = "";
-        permissaoActive = "";
+        homeActive      = "\"active\"";
+        moduloActive    = "\"dropdown\"";
+        pessoaActive    = "\"dropdown\"";
+        permissaoActive = "\"dropdown\"";
     }else if(modulo.equals("modulo")){
         homeActive      = "";
-        moduloActive    = "active";
-        pessoaActive    = "";
-        permissaoActive = "";
+        moduloActive    = "\"active dropdown\"";
+        pessoaActive    = "\"dropdown\"";
+        permissaoActive = "\"dropdown\"";
     }else if(modulo.equals("pessoa")){
         homeActive      = "";
-        moduloActive    = "";
-        pessoaActive    = "active";
-        permissaoActive = "";
+        moduloActive    = "\"dropdown\"";
+        pessoaActive    = "\"active dropdown\"";
+        permissaoActive = "\"dropdown\"";
     }else if(modulo.equals("permissao")){
         homeActive      = "";
-        moduloActive    = "";
-        pessoaActive    = "";
-        permissaoActive = "active";
+        moduloActive    = "\"dropdown\"";
+        pessoaActive    = "\"dropdown\"";
+        permissaoActive = "\"active dropdown\"";
     }
 %>
 <nav>
@@ -45,7 +45,7 @@
                 <div class="nav-collapse collapse navbar-responsive-collapse">
                     <ul class="nav">
                         <li class=<%= homeActive %>><a href="/JspProject">Home</a></li>
-                        <li class= <%= moduloActive +" dropdown"%>>
+                        <li class= <%= moduloActive %>>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Modulos<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li class="nav-header">Modulos</li>
@@ -61,7 +61,7 @@
                                 <li><a href=<%= moduloMenu + "/funcao.jsp" %>>Listagem de Fun&ccedil;&atilde;o</a></li>
                             </ul>
                         </li>
-                        <li class= <%= pessoaActive +" dropdown"%>>
+                        <li class=<%= pessoaActive %>>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pessoas <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li class="nav-header">Usu&aacute;rios</li>
@@ -73,7 +73,7 @@
                                 <li><a href=<%= pessoaMenu + "/perfil.jsp" %>>Listagem Perfis </a></li>
                             </ul>
                         </li>
-                        <li class= <%= permissaoActive +" dropdown"%>>
+                        <li class= <%= permissaoActive %>>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Permiss&otilde;es <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href=<%= permissaoMenu + "/permissao_cad.jsp" %>>Cadastrar Permiss&atilde;o </a></li>
